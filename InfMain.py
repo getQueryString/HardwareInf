@@ -1,7 +1,6 @@
 # https://psutil.readthedocs.io/en/latest/
 
 from datetime import datetime
-
 import psutil
 import platform
 import GPUtil
