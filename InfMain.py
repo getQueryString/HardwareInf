@@ -20,7 +20,7 @@ def checkPlatform():
 
 
 def GitHubLink(event):
-    webbrowser.open_new(r"http://www.github.com")
+    webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
 
 
 def action():
