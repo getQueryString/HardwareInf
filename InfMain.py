@@ -2,6 +2,7 @@
 
 import os
 import webbrowser
+
 import psutil
 import GPUtil
 import platform
@@ -9,6 +10,7 @@ import platform
 from datetime import datetime
 from tkinter import *
 from tkinter.ttk import *
+from PIL import Image, ImageTk
 
 
 def checkPlatform():
@@ -154,15 +156,19 @@ def action():
     # print("Moin " + name)
 
 
-# Window
+# Window settings
 Tool = Tk()
 Tool.title("Hardware Check")
-Tool.geometry("600x240")
-# messagebox.showinfo(title="", message="")
+Tool.geometry("960x536")
+Tool.resizable(False, False)
 
 Tool.icon = PhotoImage(file="icon.png")
 Tool.iconphoto(False, Tool.icon)
-Tool.configure(background="black")
+background_image = Image.open("background.png")
+background_photo = ImageTk.PhotoImage(background_image)
+background_label = Label(Tool, image=background_photo)
+background_label.image = background_photo
+background_label.place(relwidth=1, relheight=1)
 
 # Buttons
 """
