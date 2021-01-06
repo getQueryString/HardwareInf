@@ -2,10 +2,11 @@
 
 import os
 import webbrowser
-from datetime import datetime
-import platform
 import psutil
 import GPUtil
+import platform
+
+from datetime import datetime
 from tkinter import *
 from tkinter.ttk import *
 
@@ -19,7 +20,21 @@ def checkPlatform():
         print("UNKNOWN OS")
 
 
-def GitHubLink(event):
+def GitHubLink():
+    webbrowser.open_new(r"https://github.com/getQueryString?tab=repositories")
+
+
+"""
+def menu_file_action():
+    print("DATEI")
+"""
+
+
+def menu_info_action():
+    print("Programmed by getQueryString  Copyright© by Fin 2021")
+
+
+def menu_github_action():
     webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
 
 
@@ -143,28 +158,51 @@ def action():
 Tool = Tk()
 Tool.title("Hardware Check")
 Tool.geometry("600x240")
-icon = PhotoImage(file="icon.png")
-Tool.iconphoto(False, icon)
+# messagebox.showinfo(title="", message="")
+
+Tool.icon = PhotoImage(file="icon.png")
+Tool.iconphoto(False, Tool.icon)
 Tool.configure(background="black")
 
 # Buttons
-check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2")
-check_button_label = Label(Tool, text="Information about the hardware is listed", font=("courier new", 12, "bold"))
-exit_button = Button(Tool, text="Exit", command=Tool.quit, cursor="hand2")
-exit_button_label = Label(Tool, text="Quit the program", font=("courier new", 12, "bold"))
+"""
+check_button = Style()
+Style.configure("D.TButton", backgound="black")
+"""
+
+Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2")
+Tool.check_button_label = Label(Tool, text="Information about the hardware is listed",
+                                font=("courier new", 12, "bold"))
+Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2")
+Tool.exit_button_label = Label(Tool, text="Quit the program", font=("courier new", 12, "bold"))
 
 # Links
+"""
 link = Label(text="GitHub", cursor="hand2", font=("courier new", 12, "bold"), background="yellow")
 link.bind("<Button-1>", GitHubLink)
 link.place(x=100, y=0, width=50, height=20)
 link.pack(side=BOTTOM)
+"""
 
 # check_button_label.configure(style="flat.TButton", borderwidth=0)
 
 # Button Settings
-check_button.place(x=0, y=0, width=100, height=100)
-check_button_label.place(x=120, y=40, width=405, height=20)
-exit_button.place(x=0, y=110, width=100, height=100)
-exit_button_label.place(x=120, y=150, width=165, height=20)
+Tool.check_button.place(x=0, y=0, width=100, height=100)
+Tool.check_button_label.place(x=120, y=40, width=405, height=20)
+Tool.exit_button.place(x=0, y=110, width=100, height=100)
+Tool.exit_button_label.place(x=120, y=150, width=165, height=20)
 
+# Menu & co
+eingabe = Entry(Tool, width=40)
+menu = Menu(Tool)
+menu_file = Menu(menu, tearoff=0)
+menu_info = Menu(menu, tearoff=0)
+# menu_file.add_command(label="Anwenden", command=menu_file_action)
+# menu_file.add_separator()
+menu.add_cascade(label="File", menu=menu_file)
+menu.add_cascade(label="Info", menu=menu_info)
+menu_file.add_command(label="Exit", command=quit)
+menu_info.add_command(label="About", command=menu_info_action)
+menu_info.add_command(label="Source Code", command=menu_github_action)
+Tool.config(menu=menu)
 mainloop()
