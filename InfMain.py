@@ -27,20 +27,12 @@ def GitHubLink():
     webbrowser.open_new(r"https://github.com/getQueryString?tab=repositories")
 
 
-def menu_file_action():
-    print("DATEI")
-
-
 def menu_info_action():
     print("Programmed by getQueryString  Copyright© by Fin 2021")
 
 
 def menu_github_action():
     webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
-
-
-def process():
-    p = subprocess.Popen([r"C:\Users\finli\AppData\Roaming"])
 
 
 # SYSTEM INFO
@@ -165,6 +157,21 @@ def Settings():
     Tool.title("Hardware Check")
     Tool.geometry("720x380")
     Tool.resizable(False, False)
+    Tool.overrideredirect(True)
+
+    # WINDOW POSITION #
+    # Gets the requested values of the height and widht.
+    windowWidth = Tool.winfo_reqwidth()
+    windowHeight = Tool.winfo_reqheight()
+    # print("Width", windowWidth, "Height", windowHeight)
+
+    # Gets both half the screen width/height and window width/height
+    positionRight = int(Tool.winfo_screenwidth() / 3 - windowWidth / 4)
+    positionDown = int(Tool.winfo_screenheight() / 8 - windowHeight / 4)
+
+    # Positions the window in the center of the page.
+    Tool.geometry("+{}+{}".format(positionRight, positionDown))
+    # -----#
 
     Tool.icon = PhotoImage(file="icon.png")
     Tool.iconphoto(False, Tool.icon)
@@ -177,35 +184,33 @@ def Settings():
     # BUTTONS
     Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2", style="checkButton.TButton")
     Tool.check_button_label = Label(Tool, text="Information about\nthe hardware is listed",
-                                    font=("courier new", 12, "bold"), style="checkButton.TLabel")
+                                    font=("courier new", 10, "bold", "italic"), style="checkButton.TLabel")
     Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2", style="exitButton.TButton")
     Tool.exit_button_label = Label(Tool, text="Quit the program",
-                                   font=("courier new", 12, "bold"), style="exitButton.TLabel")
+                                   font=("courier new", 10, "bold", "italic"), style="exitButton.TLabel")
 
-    # BUTTON STYLE
+    # Button style
     # checkButton
     Tool.style = ttk.Style()
     Tool.style.configure("checkButton.TButton", foreground="black", background="black",
-                         font=("courier new", 13, "bold"))
+                         font=("courier new", 13, "bold"), raised="FLAT")
     Tool.style.configure("checkButton.TLabel", foreground="yellow", background="black")
     # exitButton
     Tool.style.configure("exitButton.TButton", foreground="black", background="black",
-                         font=("courier new", 13, "bold"))
+                         font=("courier new", 13, "bold"), raised="FLAT")
     Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
 
-    # BUTTON PLACE
+    # Button place
     Tool.check_button.place(x=100, y=50, width=200, height=75)
-    Tool.check_button_label.place(x=85, y=140, width=225, height=40)
+    Tool.check_button_label.place(x=108, y=140, width=183, height=40)
     Tool.exit_button.place(x=415, y=50, width=200, height=75)
-    Tool.exit_button_label.place(x=430, y=140, width=165, height=20)
+    Tool.exit_button_label.place(x=447, y=140, width=134, height=20)
 
     # MENU STRIP
     menu = Menu(Tool)
     menu_file = Menu(menu, tearoff=0)
     menu_info = Menu(menu, tearoff=0)
     menu.add_cascade(label="File", menu=menu_file)
-    # menu_file.add_command(label="Anwenden", command=menu_file_action)
-    # menu_file.add_separator()
     menu_file.add_command(label="Exit", command=quit)
 
     menu.add_cascade(label="Info", menu=menu_info)
