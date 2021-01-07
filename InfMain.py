@@ -1,11 +1,11 @@
-# https://psutil.readthedocs.io/en/latest/ & Copyright© by Fin
+# Help from https://psutil.readthedocs.io/en/latest/; https://stackoverflow.com; https://dev-community.de; &
+# Copyright© by Fin
 
 import os
 import webbrowser
 import psutil
 import GPUtil
 import platform
-import subprocess
 
 from datetime import datetime
 from tkinter import *
