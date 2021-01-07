@@ -1,4 +1,4 @@
-# Help from https://psutil.readthedocs.io/en/latest/; https://stackoverflow.com; https://dev-community.de; &
+# Help from https://psutil.readthedocs.io/en/latest/; https://stackoverflow.com; https://dev-community.de;
 # Copyright© by Fin
 
 import os
