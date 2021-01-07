@@ -14,6 +14,7 @@ from PIL import Image, ImageTk
 from tkinter import ttk
 
 
+# ------------------------ UNWICHTIGER TEIL ------------------------
 def checkPlatform():
     if os.name == "nt" or os.name == "dos":
         os.system("cls")
@@ -23,19 +24,22 @@ def checkPlatform():
         print("UNKNOWN OS")
 
 
+# ------------------------ UNWICHTIGER TEIL ------------------------
 def GitHubLink():
     webbrowser.open_new(r"https://github.com/getQueryString?tab=repositories")
 
 
+# ------------------------ UNWICHTIGER TEIL ------------------------
 def menu_info_action():
     print("Programmed by getQueryString  Copyright© by Fin 2021")
 
 
+# ------------------------ UNWICHTIGER TEIL ------------------------
 def menu_github_action():
     webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
 
 
-# SYSTEM INFO
+# SYSTEM INFO       ------------------------ UNWICHTIGER TEIL ------------------------
 def action():
     checkPlatform()
     print("-" * 40, "Sys Info", "-" * 40)
@@ -145,12 +149,9 @@ def action():
     print(f"Sensor battery:")
     print(f"\t{psutil.sensors_battery()}")
     print()
-    # wait = input("Done! Press any key...")
-
-    # name = input("Name: ")
-    # print("Moin " + name)
 
 
+# ------------------------ WICHTIGER TEIL ------------------------
 def Settings():
     # WINDOW SETTINGS
     Tool = Tk()
@@ -181,6 +182,10 @@ def Settings():
     background_label.image = background_photo
     background_label.place(relwidth=1, relheight=1)
 
+    # ------------------------ WICHTIGER TEIL ------------------------ Hier werden die Buttons erstellt,
+    # ihnen Namen gegeben, was sie ausführen sollen, welche Maus angenommen werden soll, wenn man über ihnen hovert UND 2 Texte mit dem Textinhalt text=""
+    # Mit style="" kann ich ab Zeile 199 den Buttons ein Design geben. Unter anderem foreground & background, die Schrift- art, größe usw. Mit raised="" kann
+    # ich folgendes machen: https://www.tutorialspoint.com/python/tk_relief.htm    Ab Zeile 210 werden die Positionen der Buttons gesetzt
     # BUTTONS
     Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2", style="checkButton.TButton")
     Tool.check_button_label = Label(Tool, text="Information about\nthe hardware is listed",
@@ -200,6 +205,7 @@ def Settings():
                          font=("courier new", 13, "bold"), raised="FLAT")
     Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
 
+    # ------------------------ UNWICHTIGER TEIL ------------------------
     # Button place
     Tool.check_button.place(x=100, y=50, width=200, height=75)
     Tool.check_button_label.place(x=108, y=140, width=183, height=40)
