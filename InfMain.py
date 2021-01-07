@@ -2,7 +2,6 @@
 
 import os
 import webbrowser
-
 import psutil
 import GPUtil
 import platform
@@ -11,6 +10,7 @@ from datetime import datetime
 from tkinter import *
 from tkinter.ttk import *
 from PIL import Image, ImageTk
+from tkinter import font
 
 
 def checkPlatform():
@@ -26,10 +26,8 @@ def GitHubLink():
     webbrowser.open_new(r"https://github.com/getQueryString?tab=repositories")
 
 
-"""
 def menu_file_action():
     print("DATEI")
-"""
 
 
 def menu_info_action():
@@ -156,59 +154,57 @@ def action():
     # print("Moin " + name)
 
 
-# Window settings
-Tool = Tk()
-Tool.title("Hardware Check")
-Tool.geometry("960x536")
-Tool.resizable(False, False)
+def Settings():
+    # Window settings
+    Tool = Tk()
+    Tool.title("Hardware Check")
+    Tool.geometry("1280x720")
+    Tool.resizable(False, False)
 
-Tool.icon = PhotoImage(file="icon.png")
-Tool.iconphoto(False, Tool.icon)
-background_image = Image.open("background.png")
-background_photo = ImageTk.PhotoImage(background_image)
-background_label = Label(Tool, image=background_photo)
-background_label.image = background_photo
-background_label.place(relwidth=1, relheight=1)
+    Tool.icon = PhotoImage(file="icon.png")
+    Tool.iconphoto(False, Tool.icon)
+    background_image = Image.open("background.png")
+    background_photo = ImageTk.PhotoImage(background_image)
+    background_label = Label(Tool, image=background_photo)
+    background_label.image = background_photo
+    background_label.place(relwidth=1, relheight=1)
 
-# Buttons
-"""
-check_button = Style()
-Style.configure("D.TButton", backgound="black")
-"""
+    # Buttons
+    Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2")
+    # Tool.check_button.config(font=("courier new", 12, "bold"))
+    Tool.check_button_label = Label(Tool, text="Information about the hardware is listed",
+                                    font=("courier new", 12, "bold"))
+    Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2")
+    # Links
+    """
+    link = Label(text="GitHub", cursor="hand2", font=("courier new", 12, "bold"), background="yellow")
+    link.bind("<Button-1>", GitHubLink)
+    link.place(x=100, y=0, width=50, height=20)
+    link.pack(side=BOTTOM)
+    """
 
-Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2")
-Tool.check_button_label = Label(Tool, text="Information about the hardware is listed",
-                                font=("courier new", 12, "bold"))
-Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2")
-Tool.exit_button_label = Label(Tool, text="Quit the program", font=("courier new", 12, "bold"))
+    # Button Settings
+    Tool.check_button.place(x=200, y=100, width=250, height=100)
+    Tool.check_button_label.place(x=120, y=220, width=405, height=20)
+    Tool.exit_button.place(x=830, y=100, width=250, height=100)
+    Tool.exit_button_label.place(x=870, y=220, width=165, height=20)
 
-# Links
-"""
-link = Label(text="GitHub", cursor="hand2", font=("courier new", 12, "bold"), background="yellow")
-link.bind("<Button-1>", GitHubLink)
-link.place(x=100, y=0, width=50, height=20)
-link.pack(side=BOTTOM)
-"""
+    # Menu strip
+    menu = Menu(Tool)
+    menu_file = Menu(menu, tearoff=0)
+    menu_info = Menu(menu, tearoff=0)
+    menu.add_cascade(label="File", menu=menu_file)
+    menu_file.add_command(label="Anwenden", command=menu_file_action)
+    menu_file.add_separator()
+    menu_file.add_command(label="Exit", command=quit)
 
-# check_button_label.configure(style="flat.TButton", borderwidth=0)
+    menu.add_cascade(label="Info", menu=menu_info)
+    menu_info.add_command(label="About", command=menu_info_action)
+    menu_info.add_separator()
+    menu_info.add_command(label="Source Code", command=menu_github_action)
+    Tool.config(menu=menu)
 
-# Button Settings
-Tool.check_button.place(x=0, y=0, width=100, height=100)
-Tool.check_button_label.place(x=120, y=40, width=405, height=20)
-Tool.exit_button.place(x=0, y=110, width=100, height=100)
-Tool.exit_button_label.place(x=120, y=150, width=165, height=20)
+    mainloop()
 
-# Menu & co
-eingabe = Entry(Tool, width=40)
-menu = Menu(Tool)
-menu_file = Menu(menu, tearoff=0)
-menu_info = Menu(menu, tearoff=0)
-# menu_file.add_command(label="Anwenden", command=menu_file_action)
-# menu_file.add_separator()
-menu.add_cascade(label="File", menu=menu_file)
-menu.add_cascade(label="Info", menu=menu_info)
-menu_file.add_command(label="Exit", command=quit)
-menu_info.add_command(label="About", command=menu_info_action)
-menu_info.add_command(label="Source Code", command=menu_github_action)
-Tool.config(menu=menu)
-mainloop()
+
+Settings()
