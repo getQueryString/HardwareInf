@@ -10,7 +10,6 @@ from datetime import datetime
 from tkinter import *
 from tkinter.ttk import *
 from PIL import Image, ImageTk
-from tkinter import font
 
 
 def checkPlatform():
@@ -175,6 +174,8 @@ def Settings():
     Tool.check_button_label = Label(Tool, text="Information about the hardware is listed",
                                     font=("courier new", 12, "bold"))
     Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2")
+    Tool.exit_button_label = Label(Tool, text="Quit the program",
+                                   font=("courier new", 12, "bold"))
     # Links
     """
     link = Label(text="GitHub", cursor="hand2", font=("courier new", 12, "bold"), background="yellow")
