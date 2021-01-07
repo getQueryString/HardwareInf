@@ -5,11 +5,13 @@ import webbrowser
 import psutil
 import GPUtil
 import platform
+import subprocess
 
 from datetime import datetime
 from tkinter import *
 from tkinter.ttk import *
 from PIL import Image, ImageTk
+from tkinter import ttk
 
 
 def checkPlatform():
@@ -37,9 +39,13 @@ def menu_github_action():
     webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
 
 
+def process():
+    p = subprocess.Popen([r"C:\Users\finli\AppData\Roaming"])
+
+
+# SYSTEM INFO
 def action():
     checkPlatform()
-    # System info
     print("-" * 40, "Sys Info", "-" * 40)
     uname = platform.uname()
     print(f"System:                                 {uname.system}")
@@ -49,13 +55,13 @@ def action():
     print(f"Machine:                                {uname.machine}")
     print(f"Processor:                              {uname.processor}")
 
-    # Boot time
+    # BOOT TIME
     print("-" * 40, "Boot time", "-" * 39)
     boot_time_timestamp = psutil.boot_time()
     bt = datetime.fromtimestamp(boot_time_timestamp)
     print(f"Boot time:                              {bt.day}.{bt.month}.{bt.year} {bt.hour}:{bt.minute}.{bt.second}")
 
-    # CPU info
+    # CPU INFO
     print("-" * 40, "CPU info", "-" * 40)
     print("Actual Cores:                          ", psutil.cpu_count(logical=False))
     print("Logical Cores:                         ", psutil.cpu_count(logical=True))
@@ -74,7 +80,7 @@ def action():
             else:
                 return f"{size:.3f}{i}"
 
-    # RAM info
+    # RAM INFO
     print("-" * 40, "RAM info", "-" * 40)
     virtual_mem = psutil.virtual_memory()
     print(f"Total:                                  {adjust_size(virtual_mem.total)}")
@@ -88,7 +94,7 @@ def action():
     print(f"Used:                                   {adjust_size(swap.used)}")
     print(f"Percentage:                             {swap.percent}%")
 
-    # Disk info
+    # DISK INFO
     print("-" * 40, "Disk info", "-" * 39)
     partitions = psutil.disk_partitions()
     for p in partitions:
@@ -107,7 +113,7 @@ def action():
     print(f"Read since boot:                        {adjust_size(disk_io.read_bytes)}")
     print(f"Written since boot:                     {adjust_size(disk_io.write_bytes)}")
 
-    # GPU info
+    # GPU INFO
     print("-" * 40, "GPU info", "-" * 40)
     gpus = GPUtil.getGPUs()
     for gpu in gpus:
@@ -118,7 +124,7 @@ def action():
         print(f"\tTotal Mem:                      {gpu.memoryTotal}MB")
         print(f"\tTemperature:                    {gpu.temperature} °C")
 
-    # Network info
+    # NETWORK INFO
     print("-" * 40, "Network info", "-" * 36)
     if_addrs = psutil.net_if_addrs()
     for interface_name, interface_addresses in if_addrs.items():
@@ -142,7 +148,7 @@ def action():
     print(f"Incoming packets which were dropped:    {net_io.dropin}")
     print(f"Outgoing packets which were dropped:    {net_io.dropout}")
 
-    # Battery info
+    # BATTERY INFO
     print("-" * 40, "Battery info", "-" * 36)
     print(f"Sensor battery:")
     print(f"\t{psutil.sensors_battery()}")
@@ -154,10 +160,10 @@ def action():
 
 
 def Settings():
-    # Window settings
+    # WINDOW SETTINGS
     Tool = Tk()
     Tool.title("Hardware Check")
-    Tool.geometry("1280x720")
+    Tool.geometry("720x380")
     Tool.resizable(False, False)
 
     Tool.icon = PhotoImage(file="icon.png")
@@ -168,35 +174,38 @@ def Settings():
     background_label.image = background_photo
     background_label.place(relwidth=1, relheight=1)
 
-    # Buttons
-    Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2")
-    # Tool.check_button.config(font=("courier new", 12, "bold"))
-    Tool.check_button_label = Label(Tool, text="Information about the hardware is listed",
-                                    font=("courier new", 12, "bold"))
-    Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2")
+    # BUTTONS
+    Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2", style="checkButton.TButton")
+    Tool.check_button_label = Label(Tool, text="Information about\nthe hardware is listed",
+                                    font=("courier new", 12, "bold"), style="checkButton.TLabel")
+    Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2", style="exitButton.TButton")
     Tool.exit_button_label = Label(Tool, text="Quit the program",
-                                   font=("courier new", 12, "bold"))
-    # Links
-    """
-    link = Label(text="GitHub", cursor="hand2", font=("courier new", 12, "bold"), background="yellow")
-    link.bind("<Button-1>", GitHubLink)
-    link.place(x=100, y=0, width=50, height=20)
-    link.pack(side=BOTTOM)
-    """
+                                   font=("courier new", 12, "bold"), style="exitButton.TLabel")
 
-    # Button Settings
-    Tool.check_button.place(x=200, y=100, width=250, height=100)
-    Tool.check_button_label.place(x=120, y=220, width=405, height=20)
-    Tool.exit_button.place(x=830, y=100, width=250, height=100)
-    Tool.exit_button_label.place(x=870, y=220, width=165, height=20)
+    # BUTTON STYLE
+    # checkButton
+    Tool.style = ttk.Style()
+    Tool.style.configure("checkButton.TButton", foreground="black", background="black",
+                         font=("courier new", 13, "bold"))
+    Tool.style.configure("checkButton.TLabel", foreground="yellow", background="black")
+    # exitButton
+    Tool.style.configure("exitButton.TButton", foreground="black", background="black",
+                         font=("courier new", 13, "bold"))
+    Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
 
-    # Menu strip
+    # BUTTON PLACE
+    Tool.check_button.place(x=100, y=50, width=200, height=75)
+    Tool.check_button_label.place(x=85, y=140, width=225, height=40)
+    Tool.exit_button.place(x=415, y=50, width=200, height=75)
+    Tool.exit_button_label.place(x=430, y=140, width=165, height=20)
+
+    # MENU STRIP
     menu = Menu(Tool)
     menu_file = Menu(menu, tearoff=0)
     menu_info = Menu(menu, tearoff=0)
     menu.add_cascade(label="File", menu=menu_file)
-    menu_file.add_command(label="Anwenden", command=menu_file_action)
-    menu_file.add_separator()
+    # menu_file.add_command(label="Anwenden", command=menu_file_action)
+    # menu_file.add_separator()
     menu_file.add_command(label="Exit", command=quit)
 
     menu.add_cascade(label="Info", menu=menu_info)
@@ -204,6 +213,14 @@ def Settings():
     menu_info.add_separator()
     menu_info.add_command(label="Source Code", command=menu_github_action)
     Tool.config(menu=menu)
+
+    # LINKS
+    """
+    link = Label(text="GitHub", cursor="hand2", font=("courier new", 12, "bold"), background="yellow")
+    link.bind("<Button-1>", GitHubLink)
+    link.place(x=100, y=0, width=50, height=20)
+    link.pack(side=BOTTOM)
+    """
 
     mainloop()
 
