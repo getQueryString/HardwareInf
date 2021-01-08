@@ -39,6 +39,10 @@ def menu_github_action():
     webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
 
 
+def disable_event_pass():
+    pass
+
+
 # SYSTEM INFO       ------------------------ UNWICHTIGER TEIL ------------------------
 def action():
     checkPlatform()
@@ -158,13 +162,13 @@ def Settings():
     Tool.title("Hardware Check")
     Tool.geometry("720x380")
     Tool.resizable(False, False)
-    Tool.overrideredirect(True)
+    Tool.protocol("WM_DELETE_WINDOW", disable_event_pass)
+    # Tool.overrideredirect(True)
 
     # WINDOW POSITION #
     # Gets the requested values of the height and widht.
     windowWidth = Tool.winfo_reqwidth()
     windowHeight = Tool.winfo_reqheight()
-    # print("Width", windowWidth, "Height", windowHeight)
 
     # Gets both half the screen width/height and window width/height
     positionRight = int(Tool.winfo_screenwidth() / 3 - windowWidth / 4)
@@ -184,8 +188,8 @@ def Settings():
 
     # ------------------------ WICHTIGER TEIL ------------------------ Hier werden die Buttons erstellt,
     # ihnen Namen gegeben, was sie ausführen sollen, welche Maus angenommen werden soll, wenn man über ihnen hovert UND 2 Texte mit dem Textinhalt text=""
-    # Mit style="" kann ich ab Zeile 199 den Buttons ein Design geben. Unter anderem foreground & background, die Schrift- art, größe usw. Mit raised="" kann
-    # ich folgendes machen: https://www.tutorialspoint.com/python/tk_relief.htm    Ab Zeile 210 werden die Positionen der Buttons gesetzt
+    # Mit style="" kann ich ab Zeile 203 den Buttons ein Design geben. Unter anderem foreground & background, die Schrift- art, größe usw. Mit raised="" kann
+    # ich folgendes machen: https://www.tutorialspoint.com/python/tk_relief.htm    Ab Zeile 214 werden die Positionen der Buttons gesetzt
     # BUTTONS
     Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2", style="checkButton.TButton")
     Tool.check_button_label = Label(Tool, text="Information about\nthe hardware is listed",
