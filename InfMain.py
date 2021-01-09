@@ -14,7 +14,6 @@ from PIL import Image, ImageTk
 from tkinter import ttk
 
 
-# ------------------------ UNWICHTIGER TEIL ------------------------
 def checkPlatform():
     if os.name == "nt" or os.name == "dos":
         os.system("cls")
@@ -24,17 +23,14 @@ def checkPlatform():
         print("UNKNOWN OS")
 
 
-# ------------------------ UNWICHTIGER TEIL ------------------------
 def GitHubLink():
     webbrowser.open_new(r"https://github.com/getQueryString?tab=repositories")
 
 
-# ------------------------ UNWICHTIGER TEIL ------------------------
 def menu_info_action():
     print("Programmed by getQueryString  Copyright© by Fin 2021")
 
 
-# ------------------------ UNWICHTIGER TEIL ------------------------
 def menu_github_action():
     webbrowser.open_new(r"https://github.com/getQueryString/HardwareInf/blob/master/InfMain.py")
 
@@ -43,7 +39,7 @@ def disable_event_pass():
     pass
 
 
-# SYSTEM INFO       ------------------------ UNWICHTIGER TEIL ------------------------
+# SYSTEM INFO
 def action():
     checkPlatform()
     print("-" * 40, "Sys Info", "-" * 40)
@@ -74,11 +70,11 @@ def action():
 
     def adjust_size(size):
         factor = 1024
-        for i in ["B", "KB", "MB", "GB", "TB"]:
+        for i2 in ["B", "KB", "MB", "GB", "TB"]:
             if size > factor:
                 size = size / factor
             else:
-                return f"{size:.3f}{i}"
+                return f"{size:.3f}{i2}"
 
     # RAM INFO
     print("-" * 40, "RAM info", "-" * 40)
@@ -155,13 +151,13 @@ def action():
     print()
 
 
-# ------------------------ WICHTIGER TEIL ------------------------
 def Settings():
     # WINDOW SETTINGS
     Tool = Tk()
     Tool.title("Hardware Check")
     Tool.geometry("720x380")
-    Tool.resizable(False, False)
+    # Tool.resizable(False, False)
+    # Tool.attributes("-toolwindow", True)
     Tool.protocol("WM_DELETE_WINDOW", disable_event_pass)
     # Tool.overrideredirect(True)
 
@@ -186,10 +182,6 @@ def Settings():
     background_label.image = background_photo
     background_label.place(relwidth=1, relheight=1)
 
-    # ------------------------ WICHTIGER TEIL ------------------------ Hier werden die Buttons erstellt,
-    # ihnen Namen gegeben, was sie ausführen sollen, welche Maus angenommen werden soll, wenn man über ihnen hovert UND 2 Texte mit dem Textinhalt text=""
-    # Mit style="" kann ich ab Zeile 203 den Buttons ein Design geben. Unter anderem foreground & background, die Schrift- art, größe usw. Mit raised="" kann
-    # ich folgendes machen: https://www.tutorialspoint.com/python/tk_relief.htm    Ab Zeile 214 werden die Positionen der Buttons gesetzt
     # BUTTONS
     Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2", style="checkButton.TButton")
     Tool.check_button_label = Label(Tool, text="Information about\nthe hardware is listed",
@@ -209,7 +201,6 @@ def Settings():
                          font=("courier new", 13, "bold"), raised="FLAT")
     Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
 
-    # ------------------------ UNWICHTIGER TEIL ------------------------
     # Button place
     Tool.check_button.place(x=100, y=50, width=200, height=75)
     Tool.check_button_label.place(x=108, y=140, width=183, height=40)
