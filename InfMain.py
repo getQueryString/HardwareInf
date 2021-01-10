@@ -162,7 +162,7 @@ def Settings():
     Tool.protocol("WM_DELETE_WINDOW", disable_event_pass)
     # Tool.overrideredirect(True)
 
-    # ---WINDOW POSITION --- #
+    # -- WINDOW POSITION --- #
     # Gets the requested values of the height and widht.
     windowWidth = Tool.winfo_reqwidth()
     windowHeight = Tool.winfo_reqheight()
