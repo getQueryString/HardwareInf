@@ -162,7 +162,7 @@ def Settings():
     Tool.protocol("WM_DELETE_WINDOW", disable_event_pass)
     # Tool.overrideredirect(True)
 
-    # WINDOW POSITION #
+    # ---WINDOW POSITION --- #
     # Gets the requested values of the height and widht.
     windowWidth = Tool.winfo_reqwidth()
     windowHeight = Tool.winfo_reqheight()
@@ -194,12 +194,12 @@ def Settings():
     # Button style
     # checkButton
     Tool.style = ttk.Style()
-    Tool.style.configure("checkButton.TButton", foreground="black", background="black",
-                         font=("courier new", 13, "bold"), raised="FLAT")
+    Tool.style.configure("checkButton.TButton", foreground="yellow", background="black",
+                         font=("courier new", 13, "bold"))                  # , raised="FLAT"
     Tool.style.configure("checkButton.TLabel", foreground="yellow", background="black")
     # exitButton
-    Tool.style.configure("exitButton.TButton", foreground="black", background="black",
-                         font=("courier new", 13, "bold"), raised="FLAT")
+    Tool.style.configure("exitButton.TButton", foreground="yellow", background="black",
+                         font=("courier new", 13, "bold"))                  # , raised="FLAT"
     Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
 
     # Button place
