@@ -41,6 +41,7 @@ def disable_event_pass():
 
 # SYSTEM INFO
 def action():
+    # .config(state=DISABLED)
     checkPlatform()
     print("-" * 40, "Sys Info", "-" * 40)
     uname = platform.uname()
@@ -156,7 +157,7 @@ def Settings():
     Tool = Tk()
     Tool.title("Hardware Check")
     Tool.geometry("720x380")
-    # Tool.resizable(False, False)
+    Tool.resizable(False, False)
     # Tool.attributes("-toolwindow", True)
     Tool.protocol("WM_DELETE_WINDOW", disable_event_pass)
     # Tool.overrideredirect(True)
