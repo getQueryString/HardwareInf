@@ -28,7 +28,7 @@ def GitHubLink():
 
 
 def menu_info_action():
-    print("Programmed by getQueryString  Copyright© by Fin 2021")
+    print("[Hardware Check] Programmed by getQueryString  Copyright© by Fin 2021")
 
 
 def menu_github_action():
@@ -153,6 +153,7 @@ def action():
 
 
 def Settings():
+    print("[Hardware Check] Programmed by getQueryString  Copyright© by Fin 2021")
     # WINDOW SETTINGS
     Tool = Tk()
     Tool.title("Hardware Check")
@@ -190,23 +191,27 @@ def Settings():
     Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2", style="exitButton.TButton")
     Tool.exit_button_label = Label(Tool, text="Quit the program",
                                    font=("courier new", 10, "bold", "italic"), style="exitButton.TLabel")
+    Tool.version_label = Label(Tool, text="v1.12012021", style="version.TLabel")
 
     # Button style
     # checkButton
     Tool.style = ttk.Style()
-    Tool.style.configure("checkButton.TButton", foreground="yellow", background="black",
+    Tool.style.configure("checkButton.TButton", foreground="red", background="black",
                          font=("courier new", 13, "bold"))                  # , raised="FLAT"
     Tool.style.configure("checkButton.TLabel", foreground="yellow", background="black")
     # exitButton
-    Tool.style.configure("exitButton.TButton", foreground="yellow", background="black",
+    Tool.style.configure("exitButton.TButton", foreground="red", background="black",
                          font=("courier new", 13, "bold"))                  # , raised="FLAT"
     Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
+    Tool.style.configure("version.TLabel", foreground="red", background="black", font=("courier new", 7))
 
     # Button place
     Tool.check_button.place(x=100, y=50, width=200, height=75)
     Tool.check_button_label.place(x=108, y=140, width=183, height=40)
     Tool.exit_button.place(x=415, y=50, width=200, height=75)
     Tool.exit_button_label.place(x=447, y=140, width=134, height=20)
+    Tool.version_label.place(x=661, y=340, width=58, height=20)
+    # Tool.version_label.pack(side=BOTTOM)
 
     # MENU STRIP
     menu = Menu(Tool)
