@@ -67,7 +67,7 @@ def action():
     print(f"CPU usage:                              {psutil.cpu_percent()}%")
     print("CPU usage/core:")
     for i, perc in enumerate(psutil.cpu_percent(percpu=True, interval=1)):
-        print(f"\tCore {i}:                             {perc}%")
+        print(f"\tCore {i}:                         {perc}%")
 
     def adjust_size(size):
         factor = 1024
@@ -96,8 +96,8 @@ def action():
     partitions = psutil.disk_partitions()
     for p in partitions:
         print(f"Device:                                 {p.device}")
-        print(f"\tMountpoint:                         {p.mountpoint}")
-        print(f"\tFile system type:                   {p.fstype}")
+        print(f"\tMountpoint:                     {p.mountpoint}")
+        print(f"\tFile system type:               {p.fstype}")
         try:
             partitions_usage = psutil.disk_usage(p.mountpoint)
         except PermissionError:
@@ -115,11 +115,11 @@ def action():
     gpus = GPUtil.getGPUs()
     for gpu in gpus:
         print(f"ID:                                     {gpu.id}, Name: {gpu.name}")
-        print(f"\tLoad:                               {gpu.load * 100}%")
-        print(f"\tFree Mem:                           {gpu.memoryFree}MB")
-        print(f"\tUsed Mem:                           {gpu.memoryUsed}MB")
-        print(f"\tTotal Mem:                          {gpu.memoryTotal}MB")
-        print(f"\tTemperature:                        {gpu.temperature} °C")
+        print(f"\tLoad:                           {gpu.load * 100}%")
+        print(f"\tFree Mem:                       {gpu.memoryFree}MB")
+        print(f"\tUsed Mem:                       {gpu.memoryUsed}MB")
+        print(f"\tTotal Mem:                      {gpu.memoryTotal}MB")
+        print(f"\tTemperature:                    {gpu.temperature} °C")
 
     # NETWORK INFO
     print("-" * 40, "Network info", "-" * 36)
