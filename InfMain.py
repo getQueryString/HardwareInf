@@ -12,6 +12,7 @@ from tkinter import *
 from tkinter.ttk import *
 from PIL import Image, ImageTk
 from tkinter import ttk
+from subprocess import Popen
 
 
 def checkPlatform():
@@ -152,6 +153,24 @@ def action():
     print()
 
 
+def __init__(Tool):
+    __init__(Tool)
+    Tool.check_button.pack()
+    Tool.process = None
+
+
+def check_process(Tool, process):
+    if process.poll() is None:
+        Tool.after(100, Tool.check_process, process)
+    else:
+        Tool.check_button["state"] = NORMAL
+
+
+def do_start(Tool):
+    Tool.check_button["state"] = DISABLED
+    Tool.check_process(Popen(["sleep", "3"]))
+
+
 def Settings():
     print("[Hardware Check] Programmed by getQueryString  Copyright© by Fin 2021")
     # WINDOW SETTINGS
@@ -185,7 +204,8 @@ def Settings():
     background_label.place(relwidth=1, relheight=1)
 
     # BUTTONS
-    Tool.check_button = Button(Tool, text="Check Hardware", command=action, cursor="hand2", style="checkButton.TButton")
+    Tool.check_button = Button(Tool, text="Check Hardware", command=Tool.do_start, cursor="hand2", style="checkButton"
+                                                                                                         ".TButton")
     Tool.check_button_label = Label(Tool, text="Information about\nthe hardware is listed",
                                     font=("courier new", 10, "bold", "italic"), style="checkButton.TLabel")
     Tool.exit_button = Button(Tool, text="Exit", command=quit, cursor="hand2", style="exitButton.TButton")
@@ -197,11 +217,11 @@ def Settings():
     # checkButton
     Tool.style = ttk.Style()
     Tool.style.configure("checkButton.TButton", foreground="red", background="black",
-                         font=("courier new", 13, "bold"))                  # , raised="FLAT"
+                         font=("courier new", 13, "bold"))  # , raised="FLAT"
     Tool.style.configure("checkButton.TLabel", foreground="yellow", background="black")
     # exitButton
     Tool.style.configure("exitButton.TButton", foreground="red", background="black",
-                         font=("courier new", 13, "bold"))                  # , raised="FLAT"
+                         font=("courier new", 13, "bold"))  # , raised="FLAT"
     Tool.style.configure("exitButton.TLabel", foreground="yellow", background="black")
     Tool.style.configure("version.TLabel", foreground="red", background="black", font=("courier new", 7))
 
@@ -234,7 +254,8 @@ def Settings():
     link.pack(side=BOTTOM)
     """
 
-    mainloop()
+    Tool.mainloop()
 
 
-Settings()
+if __name__ == "__main__":
+    Settings()
